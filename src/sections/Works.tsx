@@ -1,6 +1,6 @@
 import ProjectCard from "../components/ui/ProjectCard"
 import ThqCard from "../components/ui/ThqCard"
-import projects from "../project"
+import {projects} from "../project"
 
 
 

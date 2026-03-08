@@ -1,27 +1,5 @@
-
-
 import { useState } from "react"
-
-const TESTIMONIALS = [
-  {
-    quote: "QTH Studio transformed our entire digital presence. From concept to launch, every detail was handled with precision — and the results speak for themselves.",
-    name: "Sarah Mitchell",
-    role: "CEO, Aether Labs",
-    avatar: "https://i.pravatar.cc/40?img=11",
-  },
-  {
-    quote: "Working with QTH was effortless. They understood our vision immediately and delivered something far beyond what we imagined. Truly world-class work.",
-    name: "James Eriksen",
-    role: "Founder, Noma Digital",
-    avatar: "https://i.pravatar.cc/40?img=3",
-  },
-  {
-    quote: "The attention to detail is unmatched. Our conversion rate went up 40% after the redesign. QTH Studio is the only agency we trust with our brand.",
-    name: "Mia Larsen",
-    role: "CMO, Vanta Finance",
-    avatar: "https://i.pravatar.cc/40?img=5",
-  },
-]
+import { TESTIMONIALS } from "../project"
 
 export default function Testimonials() {
   const [current, setCurrent] = useState(0)
