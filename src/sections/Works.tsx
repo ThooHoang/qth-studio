@@ -1,16 +1,29 @@
+import { useRef } from "react"
+import { motion, useInView } from "framer-motion"
 import ProjectCard from "../components/ui/ProjectCard"
 import ThqCard from "../components/ui/ThqCard"
-import {projects} from "../project"
-
-
-
+import { projects } from "../project"
+import {
+  motionConfig,
+  fadeUpSmall,
+  scaleUp,
+  staggerContainer,
+} from "../lib/motion"
 
 export default function Works() {
+  const ref = useRef<HTMLElement>(null)
+  const isInView = useInView(ref, { once: true, amount: 0.2 })
+
   return (
-    <section className="bg-[#0a0a0a] border-t border-white/10 px-8 md:px-16 py-28">
+    <section ref={ref} className="bg-[#0a0a0a] border-t border-white/10 px-8 md:px-16 py-28">
 
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14">
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+        transition={{ duration: motionConfig.duration, ease: motionConfig.ease }}
+        className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14"
+      >
         <div>
           <div className="flex items-center gap-4 font-mono text-[0.68rem] tracking-[0.15em] uppercase text-white/30 mb-6">
             <span className="w-8 h-px bg-white/20 inline-block" />
@@ -28,19 +41,32 @@ export default function Works() {
         <p className="font-mono text-[0.8rem] leading-[1.9] text-white/25 max-w-xs md:text-right">
           Hover a card to preview the project. Click to explore.
         </p>
-      </div>
+      </motion.div>
 
       {/* Bento Grid */}
-      <div
+      <motion.div
+        variants={staggerContainer(0.08, 0.12)}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
         className="grid grid-cols-1 md:grid-cols-3 gap-4"
         style={{ gridTemplateRows: "300px 300px" }}
       >
-        <ProjectCard {...projects[0]} />
-        <ThqCard />
-        <ProjectCard {...projects[1]} />
-        <ProjectCard {...projects[2]} />
-        <ProjectCard {...projects[3]} />
-      </div>
+        <motion.div variants={fadeUpSmall}>
+          <ProjectCard {...projects[0]} />
+        </motion.div>
+        <motion.div variants={scaleUp}>
+          <ThqCard />
+        </motion.div>
+        <motion.div variants={fadeUpSmall}>
+          <ProjectCard {...projects[1]} />
+        </motion.div>
+        <motion.div variants={fadeUpSmall}>
+          <ProjectCard {...projects[2]} />
+        </motion.div>
+        <motion.div variants={fadeUpSmall}>
+          <ProjectCard {...projects[3]} />
+        </motion.div>
+      </motion.div>
 
       {/* CTA */}
       <div className="flex justify-between items-center mt-8 flex-wrap gap-6">
@@ -51,7 +77,6 @@ export default function Works() {
           View All Work <span>→</span>
         </button>
       </div>
-
     </section>
   )
 }

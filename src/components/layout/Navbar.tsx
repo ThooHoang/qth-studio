@@ -1,10 +1,12 @@
 import { useState } from "react"
+import {motion} from "framer-motion"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <header className="w-full">
+    <motion.header className="w-full" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.2 }}>
+  
         <div className="relative z-60 flex items-center justify-between">
 
             {/* Logo */}
@@ -126,6 +128,6 @@ export default function Navbar() {
             </div>
         </nav>
 
-    </header>
+    </motion.header>
     )
 }

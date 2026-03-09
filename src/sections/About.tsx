@@ -1,14 +1,29 @@
+import { useRef } from "react"
+import { motion, useInView } from "framer-motion"
 import { ArrowDownRight } from "lucide-react"
+import {
+  motionConfig,
+  fadeInLeftSmall,
+  staggerContainer,
+} from "../lib/motion"
 
 export default function About() {
+  const ref = useRef<HTMLElement>(null)
+  const isInView = useInView(ref, { once: true, amount: 0.2 })
+
   return (
-    <section className="border-t border-white/10 px-8 md:px-16 pt-28">
+    <section ref={ref} className="border-t border-white/10 px-8 md:px-16 pt-28">
 
       {/* Section label */}
-      <div className="flex items-center gap-4 font-mono text-xs uppercase text-white/30 mb-20">
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+        transition={{ duration: motionConfig.duration, ease: motionConfig.ease }}
+        className="flex items-center gap-4 font-mono text-xs uppercase text-white/30 mb-20"
+      >
         <span className="w-8 h-px bg-white/20 inline-block" />
         Who We Are
-      </div>
+      </motion.div>
 
       {/* Top row — arrow + headline */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-10 mb-24">
@@ -21,19 +36,28 @@ export default function About() {
           </p>
         </div>
 
-        <h2 className="font-display font-extrabold text-7xl text-white md:text-right">
+        <motion.h2
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+          transition={{ duration: motionConfig.duration, ease: motionConfig.ease }}
+          className="font-display font-extrabold text-7xl text-white md:text-right"
+        >
           What makes us<br />
           <span className="font-serif font-normal italic bg-gradient-to-r from-[#AA771C] via-[#FFED94] to-[#AA771C] bg-clip-text text-transparent">special.</span>
-        </h2>
+        </motion.h2>
       </div>
 
       {/* Divider */}
       <div className="w-full h-px bg-white/10 mb-24" />
 
       {/* 3 column grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-0 mb-24">
-
-        <div className="flex flex-col gap-6 md:pr-12">
+      <motion.div
+        variants={staggerContainer(0.1, 0.1)}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+        className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-0 mb-24"
+      >
+        <motion.div variants={fadeInLeftSmall} className="flex flex-col gap-6 md:pr-12">
           <span className="font-mono text-xs tracking-[0.12em] uppercase text-white/25">01 — What</span>
           <h3 className="font-display font-normal text-xl text-white tracking-[-0.02em]">
             Our <span className="font-serif italic font-bold  bg-[#AA771C] text-white px-1">purpose</span>
@@ -41,9 +65,9 @@ export default function About() {
           <p className="font-mono text-[0.8rem] leading-[1.9] text-white/40">
             To deliver a tangible impact on our clients' businesses. We exist as a partner, crafting strategies that are aligned with your goals — not ours.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="flex flex-col gap-6 md:border-l md:border-white/10 md:px-12">
+        <motion.div variants={fadeInLeftSmall} className="flex flex-col gap-6 md:border-l md:border-white/10 md:px-12">
           <span className="font-mono text-xs tracking-[0.12em] uppercase text-white/25">02 — How</span>
           <h3 className="font-display font-normal text-xl text-white tracking-[-0.02em]">
             Our <span className="font-serif italic font-normal text-white bg-[#AA771C] px-1">approach</span>
@@ -51,9 +75,9 @@ export default function About() {
           <p className="font-mono text-[0.8rem] leading-[1.9] text-white/40">
             Every campaign and project has clear results and clear measures. We are transparent throughout — no surprises, no fluff. Just work that moves the needle.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="flex flex-col gap-6 md:border-l md:border-white/10 md:pl-12">
+        <motion.div variants={fadeInLeftSmall} className="flex flex-col gap-6 md:border-l md:border-white/10 md:pl-12">
           <span className="font-mono text-xs tracking-[0.12em] uppercase text-white/25">03 — Why</span>
           <h3 className="font-display font-normal text-xl text-white tracking-[-0.02em]">
             Our <span className="font-serif italic font-normal text-white bg-[#AA771C] px-1">belief</span>
@@ -61,14 +85,8 @@ export default function About() {
           <p className="font-mono text-[0.8rem] leading-[1.9] text-white/40">
             Every company performs best online when strategy meets craft. We help businesses find the most effective path to get there — and stay there.
           </p>
-        </div>
-
-      </div>
-
-     
-
-   
-
+        </motion.div>
+      </motion.div>
     </section>
   )
 }
