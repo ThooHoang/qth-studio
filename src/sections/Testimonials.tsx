@@ -5,7 +5,7 @@ import { motionConfig } from "../lib/motion"
 
 export default function Testimonials() {
   const ref = useRef<HTMLElement>(null)
-  const isInView = useInView(ref, { once: true, amount: 0.35 })
+  const isInView = useInView(ref, { once: true, amount: 0.70 })
   const [current, setCurrent] = useState(0)
   const [visible, setVisible] = useState(true)
 

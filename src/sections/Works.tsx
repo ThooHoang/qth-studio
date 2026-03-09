@@ -12,7 +12,7 @@ import {
 
 export default function Works() {
   const ref = useRef<HTMLElement>(null)
-  const isInView = useInView(ref, { once: true, amount: 0.35 })
+  const isInView = useInView(ref, { once: true, amount: 0.70 })
 
   return (
     <section ref={ref} className="bg-[#0a0a0a] border-t border-white/10 px-8 md:px-16 py-28">

@@ -9,7 +9,7 @@ import {
 
 export default function About() {
   const ref = useRef<HTMLElement>(null)
-  const isInView = useInView(ref, { once: true, amount: 0.35 })
+  const isInView = useInView(ref, { once: true, amount: 0.70 })
 
   return (
     <section ref={ref} className="border-t border-white/10 px-8 md:px-16 pt-28">
@@ -26,15 +26,18 @@ export default function About() {
       </motion.div>
 
       {/* Top row — arrow + headline */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-10 mb-24">
-        <div className="flex items-center gap-6">
+      <motion.div className="flex flex-col md:flex-row md:items-end justify-between gap-10 mb-24">
+        <motion.div 
+        initial={{ opacity: 0, x: -20 }}
+        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+        transition={{ duration: motionConfig.duration, ease: motionConfig.ease }} className="flex items-center gap-6">
           <div className="border border-white/20 rounded-full w-16 h-16 flex items-center justify-center shrink-0 hover:border-yellow-100 transition-colors duration-300">
             <ArrowDownRight size={24} color="white" className="hover:translate-x-1 transition-all duration-200 ease-in " />
           </div>
           <p className="font-mono text-xs text-white/40 max-w-xs">
             A creative agency based in Denmark — building digital products that actually perform.
           </p>
-        </div>
+        </motion.div>
 
         <motion.h2
           initial={{ opacity: 0, y: 24 }}
@@ -45,7 +48,7 @@ export default function About() {
           What makes us<br />
           <span className="font-serif font-normal italic bg-gradient-to-r from-[#AA771C] via-[#FFED94] to-[#AA771C] bg-clip-text text-transparent">special.</span>
         </motion.h2>
-      </div>
+      </motion.div>
 
       {/* Divider */}
       <div className="w-full h-px bg-white/10 mb-24" />

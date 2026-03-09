@@ -10,7 +10,12 @@ import { motionConfig } from "../lib/motion"
 const PHRASE_TRANSITION = { duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }
 
 export default function Hero() {
-  const phrases = ["Digital-First Brands.", "Innovation-Driven Teams.", "Brands That Scale."]
+  const phrases = [
+    "Brands That Convert.",
+    "Teams That Demand More.",
+    "Startups Ready to Scale.",
+    "Businesses Built to Win.",
+  ]
   const [index, setIndex] = useState(0)
 
   useEffect(() => {
@@ -37,19 +42,26 @@ export default function Hero() {
             >
               Award-Winning Agency
             </motion.h1>
-            <div className="h-14 w-full overflow-hidden md:h-20 relative">
-              <AnimatePresence initial={false}>
-                <motion.h2
-                  key={index}
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -24 }}
-                  transition={PHRASE_TRANSITION}
-                  className="absolute inset-0 flex items-center justify-center text-2xl font-serif font-bold italic text-center md:text-6xl text-white"
-                >
-                  <span className="text-white">For</span> {phrases[index]}
-                </motion.h2>
-              </AnimatePresence>
+            <div className="h-14 w-full overflow-hidden md:h-20 flex items-center justify-center">
+              <h2 className="text-2xl font-serif font-bold italic text-center md:text-6xl text-white flex items-center justify-center gap-3">
+
+                {/* Only this part animates */}
+                <span className="overflow-hidden inline-flex justify-center items-center" style={{ height: "1.2em" }}>
+                  <AnimatePresence mode="wait">
+                    <motion.span
+                      key={index}
+                      initial={{ y: "100%", opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: "-100%", opacity: 0 }}
+                      transition={PHRASE_TRANSITION}
+                      className="inline-block "
+                    >
+                      For {phrases[index]}
+                    </motion.span>
+                  </AnimatePresence>
+                </span>
+
+              </h2>
             </div>
           </div>
           <motion.div
