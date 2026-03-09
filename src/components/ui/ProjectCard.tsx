@@ -11,7 +11,7 @@ type Project = {
 
 export default function ProjectCard({ num, title, tags, year, image }: Project) {
     return (
-      <div className="group relative bg-[#0f0f0f] border border-white/8 rounded-2xl p-7 flex flex-col justify-between cursor-none overflow-hidden hover:border-white/20 transition-all duration-300">
+      <div className="group relative h-full min-h-0 bg-[#0f0f0f] border border-white/8 rounded-2xl p-7 flex flex-col justify-between cursor-none overflow-hidden hover:border-white/20 transition-all duration-300">
   
         {/* Image — reveals from bottom on hover */}
         <div className="absolute bottom-0 left-0 right-0 h-full z-0 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-out">

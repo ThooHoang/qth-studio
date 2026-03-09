@@ -12,7 +12,7 @@ import {
 
 export default function Works() {
   const ref = useRef<HTMLElement>(null)
-  const isInView = useInView(ref, { once: true, amount: 0.2 })
+  const isInView = useInView(ref, { once: true, amount: 0.35 })
 
   return (
     <section ref={ref} className="bg-[#0a0a0a] border-t border-white/10 px-8 md:px-16 py-28">
@@ -51,19 +51,19 @@ export default function Works() {
         className="grid grid-cols-1 md:grid-cols-3 gap-4"
         style={{ gridTemplateRows: "300px 300px" }}
       >
-        <motion.div variants={fadeUpSmall}>
+        <motion.div variants={fadeUpSmall} className="h-full min-h-0">
           <ProjectCard {...projects[0]} />
         </motion.div>
-        <motion.div variants={scaleUp}>
+        <motion.div variants={scaleUp} className="h-full min-h-0 md:row-span-2">
           <ThqCard />
         </motion.div>
-        <motion.div variants={fadeUpSmall}>
+        <motion.div variants={fadeUpSmall} className="h-full min-h-0">
           <ProjectCard {...projects[1]} />
         </motion.div>
-        <motion.div variants={fadeUpSmall}>
+        <motion.div variants={fadeUpSmall} className="h-full min-h-0">
           <ProjectCard {...projects[2]} />
         </motion.div>
-        <motion.div variants={fadeUpSmall}>
+        <motion.div variants={fadeUpSmall} className="h-full min-h-0">
           <ProjectCard {...projects[3]} />
         </motion.div>
       </motion.div>

@@ -9,7 +9,7 @@ import {
 
 export default function About() {
   const ref = useRef<HTMLElement>(null)
-  const isInView = useInView(ref, { once: true, amount: 0.2 })
+  const isInView = useInView(ref, { once: true, amount: 0.35 })
 
   return (
     <section ref={ref} className="border-t border-white/10 px-8 md:px-16 pt-28">

@@ -3,7 +3,7 @@
 export default function ThqCard() {
     return (
       <div
-        className="row-span-2 border border-white/[0.08] rounded-2xl p-8 flex flex-col items-center justify-center relative overflow-hidden"
+        className="row-span-2 h-full min-h-0 border border-white/[0.08] rounded-2xl p-8 flex flex-col items-center justify-center relative overflow-hidden"
         style={{
           backgroundColor: "#0f0f0f",
           backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px)",

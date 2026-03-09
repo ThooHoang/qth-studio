@@ -5,7 +5,7 @@ import { motionConfig, fadeIn, staggerContainer } from "../lib/motion"
 
 export default function Footer() {
   const ref = useRef<HTMLElement>(null)
-  const isInView = useInView(ref, { once: true, amount: 0.2 })
+  const isInView = useInView(ref, { once: true, amount: 0.35 })
 
   return (
     <footer ref={ref} className="bg-[#0a0a0a] border-t border-white/[0.08] overflow-hidden">
