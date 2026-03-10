@@ -1,23 +1,66 @@
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
 import { motion, useInView } from "framer-motion"
-import { TESTIMONIALS } from "../project"
 import { motionConfig } from "../lib/motion"
+import {client} from "../lib/sanityClient"
+
+type Testimonial = {
+  _id: string
+  quote: string
+  name: string
+  role: string
+  avatar?: {
+    // image reference type; for now we can treat it as `any` or a specific Sanity image type
+  }
+}
+const query = `*[_type == "testimonial"] | order(order asc, _createdAt asc)`
+
 
 export default function Testimonials() {
+
   const ref = useRef<HTMLElement>(null)
-  const isInView = useInView(ref, { once: true, amount: 0.70 })
+  const isInView = useInView(ref, { once: true, amount: 0.25 })
   const [current, setCurrent] = useState(0)
   const [visible, setVisible] = useState(true)
+  const [testimonials,setTestimonials] = useState<Testimonial[]>([])
+  
+  useEffect(()=> {
+    client
+      .fetch<Testimonial[]>(query)
+      .then((res) => {
+        setTestimonials(res)
+      })
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        console.error("Failed to fetch testimonials from Sanity:", err)
+      })
+  },[])
+
+  // Keep `current` index in range whenever the testimonials array changes
+  useEffect(() => {
+    if (testimonials.length === 0) {
+      setCurrent(0)
+      return
+    }
+    setCurrent((c) => Math.min(c, testimonials.length - 1))
+  }, [testimonials.length])
 
   const goTo = (index: number) => {
+    if (testimonials.length === 0) return
     setVisible(false)
     setTimeout(() => {
-      setCurrent((index + TESTIMONIALS.length) % TESTIMONIALS.length)
+      setCurrent((index + testimonials.length) % testimonials.length)
       setVisible(true)
     }, 500)
   }
 
-  const t = TESTIMONIALS[current]
+  if (testimonials.length===0){
+    return null
+  }
+
+  const t = testimonials[current]
+  if (!t) {
+    return null
+  }
 
   return (
     <motion.section
@@ -58,7 +101,7 @@ export default function Testimonials() {
 
         <div className="inline-flex items-center gap-3 bg-white/[0.04] border border-white/10 rounded-full pl-2 pr-5 py-2">
           <img
-            src={t.avatar}
+            src={(t as any).avatar}
             alt={t.name}
             className="w-9 h-9 rounded-full object-cover"
             style={{ filter: "grayscale(20%)" }}
@@ -89,7 +132,7 @@ export default function Testimonials() {
       </button>
 
       <div className="flex items-center gap-2 mt-14 z-10">
-        {TESTIMONIALS.map((_, i) => (
+        {testimonials.map((_, i) => (
           <button
             key={i}
             onClick={() => goTo(i)}
