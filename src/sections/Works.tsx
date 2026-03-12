@@ -51,21 +51,32 @@ export default function Works() {
         className="grid grid-cols-1 md:grid-cols-3 gap-4"
         style={{ gridTemplateRows: "300px 300px" }}
       >
-        <motion.div variants={fadeUpSmall} className="h-full min-h-0">
-          <ProjectCard {...projects[0]} />
-        </motion.div>
+        {/* First project(s) on the left */}
+        {projects.slice(0, 1).map((project) => (
+          <motion.div
+            key={project.title}
+            variants={fadeUpSmall}
+            className="h-full min-h-0"
+          >
+            <ProjectCard {...project} />
+          </motion.div>
+        ))}
+
+        {/* Center THQ card */}
         <motion.div variants={scaleUp} className="h-full min-h-0 md:row-span-2">
           <ThqCard />
         </motion.div>
-        <motion.div variants={fadeUpSmall} className="h-full min-h-0">
-          <ProjectCard {...projects[1]} />
-        </motion.div>
-        <motion.div variants={fadeUpSmall} className="h-full min-h-0">
-          <ProjectCard {...projects[2]} />
-        </motion.div>
-        <motion.div variants={fadeUpSmall} className="h-full min-h-0">
-          <ProjectCard {...projects[3]} />
-        </motion.div>
+
+        {/* Remaining projects to the right / bottom */}
+        {projects.slice(1).map((project) => (
+          <motion.div
+            key={project.title}
+            variants={fadeUpSmall}
+            className="h-full min-h-0"
+          >
+            <ProjectCard {...project} />
+          </motion.div>
+        ))}
       </motion.div>
 
       {/* CTA */}

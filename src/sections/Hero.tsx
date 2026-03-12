@@ -2,7 +2,7 @@ import Navbar from "../components/layout/Navbar"
 import Badge from "../components/ui/Badge"
 import Button from "../components/ui/Button"
 import { useState, useEffect } from "react"
-import Marquee from "../components/ui/Marquee"
+// import Marquee from "../components/ui/Marquee"
 import DottedBg from "../components/layout/DottedBg"
 import { motion, AnimatePresence } from "framer-motion"
 import { motionConfig } from "../lib/motion"
@@ -33,14 +33,14 @@ export default function Hero() {
         <div className="flex flex-col gap-30 w-full justify-center">
           <Navbar />
           <div className="text-xl mt-4 flex flex-col gap-4 justify-center items-center">
-            <Badge name="LEADING WEB DESIGN AGENCY IN DENMARK" />
+            <Badge name="WEB DESIGN AGENCY IN DENMARK" />
             <motion.h1
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: motionConfig.duration, delay: 0.25 }}
               className="text-4xl font-display font-normal bg-gradient-to-r from-[#AA771C] via-[#FFED94] to-[#AA771C] bg-clip-text text-transparent md:text-5xl text-center"
             >
-              Award-Winning Agency
+              Danish Web Design Studio
             </motion.h1>
             <div className="h-14 w-full overflow-hidden md:h-20 flex items-center justify-center">
               <h2 className="text-2xl font-serif font-bold italic text-center md:text-6xl text-white flex items-center justify-center gap-3">
@@ -79,7 +79,7 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ duration: motionConfig.durationLong, delay: 1 }}
         >
-          <Marquee />
+          {/* <Marquee /> */}
         </motion.div>
       </div>
     </section>

@@ -1,17 +1,17 @@
-
+// ProjectCard.tsx
 type Project = {
-    num:string,
-    title:string,
-    tags:string[],
-    year:string,
-    image:string
-  
-  }
+  num: string
+  title: string
+  tags: string[]
+  year: string
+  image: string
+  href?: string
+}
 
 
-export default function ProjectCard({ num, title, tags, year, image }: Project) {
-    return (
-      <div className="group relative h-full min-h-0 bg-[#0f0f0f] border border-white/8 rounded-2xl p-7 flex flex-col justify-between cursor-none overflow-hidden hover:border-white/20 transition-all duration-300">
+export default function ProjectCard({ num, title, tags, year, image ,href}: Project) {
+  const content = (
+    <div className="group relative h-full min-h-0 bg-[#0f0f0f] border border-white/8 rounded-2xl p-7 flex flex-col justify-between cursor-none overflow-hidden hover:border-white/20 transition-all duration-300">
   
         {/* Image — reveals from bottom on hover */}
         <div className="absolute bottom-0 left-0 right-0 h-full z-0 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-out">
@@ -39,8 +39,11 @@ export default function ProjectCard({ num, title, tags, year, image }: Project) 
           {/* Bottom */}
           <div>
             <div className="flex gap-2 mb-2 flex-wrap">
-              {tags.map((tag) => (
-                <span key={tag} className="font-mono text-[0.58rem] tracking-widest uppercase text-white/25 border border-white/10 px-3 py-1 rounded-full">
+              {(tags ?? []).map((tag) => (
+                <span
+                  key={tag}
+                  className="font-mono text-[0.58rem] tracking-widest uppercase text-white/25 border border-white/10 px-3 py-1 rounded-full"
+                >
                   {tag}
                 </span>
               ))}
@@ -53,5 +56,12 @@ export default function ProjectCard({ num, title, tags, year, image }: Project) 
   
         </div>
       </div>
-    )
+  )
+  return href ? (
+    <a href={href} target="_blank" rel="noreferrer">
+      {content}
+    </a>
+  ) : (
+    content
+  )
   }
