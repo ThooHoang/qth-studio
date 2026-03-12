@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       <Cursor/>
-      <Navbar themeToggle={() => {}} theme="dark" />
+      <Navbar />
       <Hero />
       <About/>
       <Works/>
